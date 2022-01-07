@@ -32,11 +32,9 @@ jobs:
           - ruby: "2.7"
             gemfile: gemfiles/Gemfile.rails6.0
             bundler: "2"
-        include:
           - ruby: "2.6"
             gemfile: gemfiles/Gemfile.rails6.0
             bundler: "2"
-        include:
           - ruby: "2.6"
             gemfile: gemfiles/Gemfile.rails5.2
             bundler: "2"
