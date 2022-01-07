@@ -1,9 +1,23 @@
-require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
-require 'capybara/rspec'
+# frozen_string_literal: true
 
-# Put your acceptance spec helpers inside /spec/acceptance/support
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+require_relative '../spec_helper'
+require_relative '../support/rails_app'
+require 'rails'
 
-RSpec.configure do |config|
-  config.include Rails.application.routes.url_helpers, :type => :request
+require 'selenium-webdriver'
+
+Capybara.default_driver = :selenium_chrome
+Capybara.register_driver :chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')
+  options.add_argument('--allow-insecure-localhost')
+  options.add_argument('--ignore-certificate-errors')
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    capabilities: [options]
+  )
 end
+Capybara.default_driver = :chrome
+Capybara.server = :webrick

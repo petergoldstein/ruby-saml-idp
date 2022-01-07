@@ -1,23 +1,17 @@
-$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
-$LOAD_PATH.unshift File.dirname(__FILE__)
+# frozen_string_literal: true
 
-STDERR.puts("Running Specs under Ruby Version #{RUBY_VERSION}")
-
-require "rails_app/config/environment"
+warn("Running Specs under Ruby Version #{RUBY_VERSION}")
 
 require 'rspec'
 require 'capybara/rspec'
-require 'capybara/rails'
 
 require 'ruby-saml'
-require 'ruby-saml-idp'
+require 'stub_saml_idp'
+require 'support/saml_request_macros'
 
-Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|f| require f}
+Capybara.default_host = 'https://app.example.com'
 
 RSpec.configure do |config|
   config.mock_with :rspec
   config.include SamlRequestMacros
 end
-
-Capybara.default_host = "https://app.example.com"
-

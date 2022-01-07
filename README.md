@@ -1,29 +1,20 @@
-# Ruby SAML Identity Provider (IdP)
+# Stub SAML Identity Provider (IdP)
 
-[![Build Status](https://secure.travis-ci.org/lawrencepit/ruby-saml-idp.png)](http://travis-ci.org/lawrencepit/ruby-saml-idp?branch=master)
-[![Gem Version](https://fury-badge.herokuapp.com/rb/ruby-saml-idp.png)](http://badge.fury.io/rb/ruby-saml-idp)
+The Stub SAML Identity Provider library allows users to easily spin up stub SAML IdP
+servers in test environments.  
+  The intention is that 
+for testing against the server side of SAML authentication. It allows your application to act as an IdP (Identity Provider) using the [SAML v2.0](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) protocol. It provides a means for managing authentication requests and confirmation responses for SPs (Service Providers).
 
-The ruby SAML Identity Provider library is for implementing the server side of SAML authentication. It allows your application to act as an IdP (Identity Provider) using the [SAML v2.0](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) protocol. It provides a means for managing authentication requests and confirmation responses for SPs (Service Providers).
-
-Setting up a "real" IdP is such an undertaking I didn't care for such an achievement. I wanted something very simple that just works without having to install extra components and setup extra infrastructure. In it's current form it's basic. This is because currently I use it for manual and end-to-end testing purposes of the Service Provider side only. It is reversed engineered from real-world SAML Responses sent by ADFS systems.
+This is not a "real" IdP and should not be used in production environments.  It is intended
+only for use in testing environments.
 
 
 Installation and Usage
 ----------------------
 
-Add this to your Gemfile:
+Add this to the Gemfile of your Rails app in your test environment:
 
-    gem 'ruby-saml-idp'
-
-### Not using rails?
-
-Include `SamlIdp::Controller` and see the examples that use rails. It should be straightforward for you.
-
-Basically you call `decode_SAMLRequest(params[:SAMLRequest])` on an incoming request and then use the value `saml_acs_url` to determine the source for which you need to authenticate a user. How you authenticate a user is entirely up to you.
-
-Once a user has successfully authenticated on your system send the Service Provider a SAMLReponse by posting to `saml_acs_url` the parameter `SAMLResponse` with the return value from a call to `encode_SAMLResponse(user_email)`.
-
-### Using rails?
+    gem 'stub_saml_idp'
 
 Add to your `routes.rb` file, for example:
 
@@ -35,7 +26,7 @@ post '/saml/auth' => 'saml_idp#create'
 Create a controller that looks like this, customize to your own situation:
 
 ``` ruby
-class SamlIdpController < SamlIdp::IdpController
+class SamlIdpController < StubSamlIdp::IdpController
   before_action :find_account
   # layout 'saml_idp'
 
@@ -62,7 +53,7 @@ end
 The most minimal example controller would look like:
 
 ``` ruby
-class SamlIdpController < SamlIdp::IdpController
+class SamlIdpController < StubSamlIdp::IdpController
 
   def idp_authenticate(email, password)
     true
