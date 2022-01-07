@@ -3,16 +3,11 @@
 # Set up a SAML IdP
 
 gem 'stub_saml_idp', path: File.expand_path('../..', __dir__)
-gem 'thin'
 
-insert_into_file('Gemfile', after: /\z/) do
-  <<~GEMFILE
-    if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new("3.1")
-      gem 'net-smtp', require: false
-      gem 'net-imap', require: false
-      gem 'net-pop', require: false
-    end
-  GEMFILE
+if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new("3.1")
+  gem 'net-smtp', require: false
+  gem 'net-imap', require: false
+  gem 'net-pop', require: false
 end
 
 route "get '/saml/auth' => 'saml_idp#new'"
