@@ -6,7 +6,6 @@ require 'rails'
 
 require 'selenium-webdriver'
 
-Capybara.default_driver = :selenium_chrome
 Capybara.register_driver :chrome do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--headless')

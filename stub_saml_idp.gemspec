@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.name = 'stub_saml_idp'
   s.version = StubSamlIdp::VERSION
   s.platform = Gem::Platform::RUBY
-  s.authors = ['Peter Goldstein']
+  s.authors = ['Peter M. Goldstein']
   s.email = 'peter.m.goldstein@gmail.com'
   s.homepage = 'http://github.com/petergoldstein/stub_saml_idp'
   s.summary = 'Stub SAML Identity Provider'

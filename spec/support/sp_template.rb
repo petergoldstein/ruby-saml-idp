@@ -5,7 +5,7 @@
 gem 'ruby-saml'
 gem 'stub_saml_idp', path: File.expand_path('../..', __dir__)
 
-if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new("3.1")
+if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('3.1')
   gem 'net-smtp', require: false
   gem 'net-imap', require: false
   gem 'net-pop', require: false

@@ -1,9 +1,7 @@
 # Stub SAML Identity Provider (IdP)
 
 The Stub SAML Identity Provider library allows users to easily spin up stub SAML IdP
-servers in test environments.  
-  The intention is that 
-for testing against the server side of SAML authentication. It allows your application to act as an IdP (Identity Provider) using the [SAML v2.0](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) protocol. It provides a means for managing authentication requests and confirmation responses for SPs (Service Providers).
+servers in test environments.    
 
 This is not a "real" IdP and should not be used in production environments.  It is intended
 only for use in testing environments.
@@ -69,7 +67,7 @@ end
 Keys and Secrets
 ----------------
 
-To generate the SAML Response it uses a default X.509 certificate and secret key... which isn't so secret. You can find them in `SamlIdp::Default`. The X.509 certificate is valid until year 2032. Obviously you shouldn't use these if you intend to use this in production environments. In that case, within the controller set the properties `x509_certificate` and `secret_key` using a `prepend_before_action` callback within the current request context or set them globally via the `SamlIdp.config.x509_certificate` and `SamlIdp.config.secret_key` properties.
+To generate the SAML Response it uses a default X.509 certificate and secret key... which isn't so secret. You can find them in `SamlIdp::Default`. The X.509 certificate is valid until year 2032. You can customize these values by setting the properties `x509_certificate` and `secret_key` using a `prepend_before_action` callback within the current request context or setting them globally via the `SamlIdp.config.x509_certificate` and `SamlIdp.config.secret_key` properties.
 
 The fingerprint to use, if you use the default X.509 certificate of this gem, is:
 
@@ -84,7 +82,13 @@ Service Providers
 To act as a Service Provider which generates SAML Requests and can react to SAML Responses use the excellent [ruby-saml](https://github.com/onelogin/ruby-saml) gem.
 
 
+Contributors
+-------------
+
+This is an updated version of the stub SAML IDP originally published by [Lawrence Pit](https://github.com/lawrencepit).  The updated gem would not have been possible without his contribution.
+
 Copyright
 -----------
 
+Copyright (c) 2022 Peter M. Goldstein See MIT-LICENSE for details.
 Copyright (c) 2012 Lawrence Pit. See MIT-LICENSE for details.
